@@ -50,4 +50,18 @@ authorsRouter.get("/", (req, res) => {
   res.send(authors);
 });
 
+authorsRouter.get("/:authorId", (req, res) => {
+  //   res.send({ message: "Single author endpoint " });
+
+  //   console.log("ID:", req.params.userId);
+
+  const authors = JSON.parse(fs.readFileSync(authorsJSONPath));
+
+  const author = authors.find((author) => author.id === req.params.authorId);
+
+  console.log(author);
+
+  res.send(author);
+});
+
 export default authorsRouter;
