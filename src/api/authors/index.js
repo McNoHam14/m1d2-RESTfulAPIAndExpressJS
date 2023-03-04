@@ -100,4 +100,18 @@ authorsRouter.delete("/:authorId", (req, res) => {
   res.status(204).send();
 });
 
+authorsRouter.post("/checkEmail", (req, res) => {
+  const authorsArray = JSON.parse(fs.readFileSync(authorsJSONPath));
+
+  const emailInUse = authorsArray.some(
+    (author) => author.email === req.body.email
+  );
+
+  console.log("A", emailInUse);
+
+  res.send(
+    `This email: ${req.body.email} is already is use (bool:${emailInUse})`
+  );
+});
+
 export default authorsRouter;
